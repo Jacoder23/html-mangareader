@@ -15,22 +15,34 @@ I made this out of frustration with the bloat and clunkiness I experienced with 
 
 ### Planned features
 
-- MacOS binary.
+- MacOS support for CBR/RAR.
 - UI improvements to View Options.
 
-## Install (Windows)
+## Install (Windows/macOS)
 
-Windows binaries are located under [Releases](https://github.com/luejerry/html-mangareader/releases).
+Prebuilt binaries are located under [Releases](https://github.com/luejerry/html-mangareader/releases).
+
+### Windows
 
 Download and extract your desired version, and the application is ready to use. No installation is required.
 
-## Usage (Windows)
+### macOS (10.13+)
+
+Mangareader currently requires macOS 10.13 (High Sierra) or above. Download the dmg and copy `mangareader.app` to your `Applications` directory.
+
+## Usage (Windows/macOS)
 
 The app can be started in several different ways:
 
-- Run `mangareader.exe` and open an image file or ZIP/CBZ/RAR/CBR.
+- Run `mangareader.exe` (Windows) or `mangareader.app` (MacOS) and open an image file or comic book archive.
 - Right click an image file or archive, and "Open with..." the Mangareader executable.
 - Drag an image file, image folder, or archive onto Mangareader executable or a shortcut.
+
+### macOS
+
+macOS support is currently in alpha. Known issues:
+
+- CBR/RAR archives are not yet supported on macOS.
 
 ## Build
 
@@ -43,8 +55,14 @@ Building the executable is done using [PyInstaller](https://www.pyinstaller.org/
 - Rarfile: `pip install rarfile` or `pip install -r requirements.txt`
 - py7zr: `pip install py7zr` or `pip install -r requirements.txt`
 
-### Building on Windows
+### Windows
 
 Run `build-win.cmd`. The executable will be created in `dist\mangareader`.
+
+PyInstaller options can be configured in the script. See the [documentation](https://pyinstaller.readthedocs.io/en/stable/usage.html) for details.
+
+### macOS
+
+Run `build-mac.sh`. The app bundle will be created in `dist`.
 
 PyInstaller options can be configured in the script. See the [documentation](https://pyinstaller.readthedocs.io/en/stable/usage.html) for details.
