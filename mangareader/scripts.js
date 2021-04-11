@@ -178,6 +178,7 @@
   const scrubberPreviewDiv = document.getElementById('scrubber-preview');
   const scrubberMarker = document.getElementById('scrubber-marker');
   const scrubberMarkerActive = document.getElementById('scrubber-marker-active');
+  const horizontalReader = document.getElementById('input-horizontal');
   let scrubberImages; // Array of images, set in `setupScrubber()`
 
   const animationDispatcher = createAnimationDispatcher();
@@ -297,6 +298,16 @@
     const key = event.target.dataset.fitKey;
     smartFitImages(smartFit[key]);
   }
+  
+  function handleHorizontalReader() {	
+    if (document.body.classList.contains("stop-scrolling")) {	
+      document.body.classList.remove("stop-scrolling");	
+    } else {	
+      document.body.classList.add("stop-scrolling");	
+    }
+	setImagesHeight(screenClamp.fit, getHeight());
+  }	
+
 
   function setImagesWidth(fitMode, width) {
     for (const img of images) {
@@ -456,6 +467,7 @@
     smoothScrollCheckbox.addEventListener('change', handleSmoothScroll);
     darkModeCheckbox.addEventListener('change', handleDarkMode);
     seamlessCheckbox.addEventListener('change', handleSeamless);
+	horizontalReader.addEventListener('change', handleHorizontalReader);
   }
 
   function setupScrubberPreview() {
@@ -499,7 +511,11 @@
     };
 
     let scrubberActivated = false;
-    scrubberDiv.addEventListener('mouseenter', () => {
+	
+	// TODO: Improve scrubber usability by making it activate on an icon click rather than a hover then reactivate element
+	
+	// Set to mouse DOM event
+    scrubberDiv.addEventListener('', () => {
       if (!scrubberActivated) {
         scrubberImages = setupScrubberPreview();
         scrubberActivated = true;
@@ -511,14 +527,16 @@
 
       setScrubberMarkerActive(visiblePageIndex);
       scrubberDiv.style.height = `${screenHeight}px`;
-      scrubberContainerDiv.style.opacity = '1';
+	  
+	  // Set back to 1
+      scrubberContainerDiv.style.opacity = '0';
     });
 
     scrubberDiv.addEventListener('mouseleave', () => {
       scrubberContainerDiv.style.opacity = '0';
     });
 
-    scrubberDiv.addEventListener('mousemove', (event) => {
+    /* scrubberDiv.addEventListener('mousemove', (event) => {
       const cursorY = event.clientY;
       const cursorYRatio = cursorY / screenHeight;
       const imageIndex = Math.floor(cursorYRatio * images.length);
@@ -535,7 +553,7 @@
           prevImage = image;
         }
       });
-    });
+    }); */
     scrubberDiv.addEventListener('click', (event) => {
       const cursorYRatio = event.clientY / screenHeight;
       const imageIndex = Math.floor(cursorYRatio * images.length);
