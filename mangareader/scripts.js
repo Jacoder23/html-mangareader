@@ -179,6 +179,7 @@
   const scrubberMarker = document.getElementById('scrubber-marker');
   const scrubberMarkerActive = document.getElementById('scrubber-marker-active');
   const horizontalReader = document.getElementById('input-horizontal');
+  const horizontalReaderEnabled = false;
   let scrubberImages; // Array of images, set in `setupScrubber()`
 
   const animationDispatcher = createAnimationDispatcher();
@@ -299,18 +300,25 @@
     smartFitImages(smartFit[key]);
   }
   
-  function handleHorizontalReader() {	
-    if (document.body.classList.contains("stop-scrolling")) {	
-      document.body.classList.remove("stop-scrolling");	
-    } else {
+  // TODO: Fix so it can work and detect comics with pages that are wider than they are long
+  // TODO: Save option in cookie/localstorage
+  function handleHorizontalReader(config) {
+	const horizontalReaderEnabled = event.target.checked;
+    if (horizontalReaderEnabled) {	
       document.body.classList.add("stop-scrolling");	
+    } else {
+	  document.body.classList.remove("stop-scrolling");	
     }
+    writeConfig({
+      horizontal: horizontalReaderEnabled,
+    });
+    visiblePage.scrollIntoView();
 	if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
 	  // Mobile
-	  setImagesHeight(screenClamp.fit, getHeight());
-	}else{
+	  setImagesDimensions(screenClamp.shrink, getWidth(), getHeight());
+	} else {
 	  // Desktop
-	  setImagesHeight(screenClamp.fit, getHeight());
+	  setImagesDimensions(screenClamp.shrink, getWidth(), getHeight());
 	}
   }	
 
@@ -573,7 +581,7 @@
     }
   }
 
-  async function checkVersion() {
+  /* async function checkVersion() {
     const response = await fetch(versionCheckUrl, { method: 'GET', mode: 'cors' }).then((r) =>
       r.json(),
     );
@@ -592,13 +600,32 @@
       await asyncTimeout(5000);
       updateToast.classList.remove('show');
     }
-  }
+  } */
+  
+  // TODO: Improve zoom detection and explain reasons for zoom detection lol
+  
+  const firstWidth = getWidth();
+  /* 
+	(function(){
+	  var lastWidth = 0;
+	  function pollZoomFireEvent() {
+		var widthNow = getWidth();
+		if (lastWidth == widthNow) return;
+		lastWidth = widthNow;
+		// Length changed, user must have zoomed
+		document.body.classList.remove("stop-scrolling");
+		if(widthNow == firstWidth && horizontalReaderEnabled) {
+			document.body.classList.add("stop-scrolling");
+		}
+	  }
+	  setInterval(pollZoomFireEvent, 100);
+	})(); */
 
   function main() {
     setupListeners();
     loadSettings();
     attachIntersectObservers();
-    checkVersion();
+    //checkVersion();
     setupScrubber();
   }
 
