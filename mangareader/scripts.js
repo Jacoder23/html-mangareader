@@ -302,10 +302,16 @@
   function handleHorizontalReader() {	
     if (document.body.classList.contains("stop-scrolling")) {	
       document.body.classList.remove("stop-scrolling");	
-    } else {	
+    } else {
       document.body.classList.add("stop-scrolling");	
     }
-	setImagesHeight(screenClamp.fit, getHeight());
+	if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+	  // Mobile
+	  setImagesHeight(screenClamp.fit, getHeight());
+	}else{
+	  // Desktop
+	  setImagesHeight(screenClamp.fit, getHeight());
+	}
   }	
 
 

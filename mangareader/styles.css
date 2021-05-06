@@ -155,6 +155,9 @@ a[href='#_none'] {
   position: relative;
   text-align: center;
   margin-top: var(--page-vertical-margin);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .arrow {
