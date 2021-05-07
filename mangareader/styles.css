@@ -244,7 +244,7 @@ a[href='#_none'] {
   background: rgba(0, 0, 0, 0);
   border: none;
   text-align: left;
-  font-size: 14px;
+  font-size: 16px;
   margin: 0;
 }
 
@@ -269,6 +269,29 @@ label {
   cursor: pointer;
   padding: 12px 24px 12px 36px;
   margin-left: 24px;
+}
+
+@media (max-width: 1000px) {
+	.menu-items label {
+      font-size: 36px;
+	}
+	.menu-items button {
+      font-size: 36px;
+	}
+	.toolbar .menu-icon {
+	  background: var(--menu-icon);
+	  background-size: cover;
+	  width: 64px;
+	  height: 64px;
+	  opacity: 0.4;
+	  margin-top: 6px;
+	  margin-left: 6px;
+	  transition: opacity 0.4s;
+	}
+	.toolbar:hover {
+		height: 720px;
+	}
+		
 }
 
 .label-toggle .input-toggle {
@@ -328,7 +351,7 @@ label {
   position: fixed;
   right: 0;
   top: 0;
-  padding-left: 128px;
+  padding-left: 0px;
   display: flex;
   flex-direction: row;
   z-index: 1;
@@ -344,7 +367,7 @@ label {
 }
 
 #scrubber {
-  width: 90px;
+  width: 0px;
   cursor: pointer;
   height: 100vh;
   z-index: 1;
@@ -361,7 +384,7 @@ label {
 }
 
 .scrubber-preview-image {
-  height: 180px;
+  height: 0px;
   display: block;
   margin-top: 8px;
   margin-bottom: 8px;
