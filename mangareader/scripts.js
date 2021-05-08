@@ -265,12 +265,13 @@
   }
   
   function setupHorizontal(config) {
-	horizontalReader.checked = config.horizontal;
-	if (config.horizontal) {
-	  const change = document.createEvent('Event');
-	  change.initEvent('change', false, true);
-	  horizontalReader.dispatchEvent(change);
-	}
+		$(".page").css( "padding-top", "auto" );
+		horizontalReader.checked = config.horizontal;
+		if (config.horizontal) {
+			const change = document.createEvent('Event');
+			change.initEvent('change', false, true);
+			horizontalReader.dispatchEvent(change);
+		}
   }
 
   function getWidth() {
