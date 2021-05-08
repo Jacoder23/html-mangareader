@@ -317,40 +317,34 @@
 		if (horizontalReaderEnabled) {	
 			document.body.classList.add("stop-scrolling");	
 			$(".page").css( "margin-bottom", "4000px" );
+			if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+				$(".page").css( "padding-top", "25%" );
+			}
 		} else {
 			document.body.classList.remove("stop-scrolling");
 			$(".page").css( "margin-bottom", "auto" );
+			if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+				$(".page").css( "padding-top", "auto" );
+			}
 			writeConfig({
 			horizontal: horizontalReaderEnabled,
 			});
 		}
 		visiblePage.scrollIntoView();
 		setImagesDimensions(screenClamp.shrink, getWidth(), getHeight());
-		if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
-				// Mobile
-				/* if(window.location.hash) {
-					for (i = 0; i < pages.length; i++) {
-						if (parseInt(window.location.hash.slice(0)) == i){
-							document.getElementById("_" + String(i)).style.visibility == "visible";
-						} else {
-							document.getElementById("_" + String(i)).style.visibility == "hidden";
-						}
-					}
-				} */
-			if(seamlessCheckbox.checked == true) {
-				seamlessCheckbox.checked = false;
-				document.body.classList.remove('seamless');
-				writeConfig({
-					seamless: seamlessEnabled,
-				});
-			}
-			if(smoothScrollCheckbox.checked == true) {
-				smoothScrollCheckbox.checked = false; 
-				window.pauseZenscroll = !event.target.checked;
-				writeConfig({
-					smoothScroll: event.target.checked,
-				});
-			}
+		if(seamlessCheckbox.checked == true) {
+			seamlessCheckbox.checked = false;
+			document.body.classList.remove('seamless');
+			writeConfig({
+				seamless: seamlessEnabled,
+			});
+		}
+		if(smoothScrollCheckbox.checked == true) {
+			smoothScrollCheckbox.checked = false; 
+			window.pauseZenscroll = !event.target.checked;
+			writeConfig({
+				smoothScroll: event.target.checked,
+			});
 		}
   }	
 
