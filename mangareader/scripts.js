@@ -313,29 +313,45 @@
   // TODO: Fix so it can work and detect comics with pages that are wider than they are long
   // TODO: Save option in cookie/localstorage
   function handleHorizontalReader(config) {
-	const horizontalReaderEnabled = event.target.checked;
-	if (horizontalReaderEnabled) {	
-	  document.body.classList.add("stop-scrolling");	
-	} else {
-	  document.body.classList.remove("stop-scrolling");	
-	  writeConfig({
-		horizontal: horizontalReaderEnabled,
-	  });
-	}
-	visiblePage.scrollIntoView();
-	setImagesDimensions(screenClamp.shrink, getWidth(), getHeight());
-	if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
-	  // Mobile
-	  if(window.location.hash) {
-		for (i = 0; i < pages.length; i++) {
-		  if (parseInt(window.location.hash.slice(0)) == i){
-			document.getElementById("_" + String(i)).style.visibility == "visible";
-		  } else {
-			document.getElementById("_" + String(i)).style.visibility == "hidden";
-		  }
+		const horizontalReaderEnabled = event.target.checked;
+		if (horizontalReaderEnabled) {	
+			document.body.classList.add("stop-scrolling");	
+			$(".page").css( "margin-bottom", "4000px" );
+		} else {
+			document.body.classList.remove("stop-scrolling");
+			$(".page").css( "margin-bottom", "auto" );
+			writeConfig({
+			horizontal: horizontalReaderEnabled,
+			});
 		}
-	  }
-	}
+		visiblePage.scrollIntoView();
+		setImagesDimensions(screenClamp.shrink, getWidth(), getHeight());
+		if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+				// Mobile
+				/* if(window.location.hash) {
+					for (i = 0; i < pages.length; i++) {
+						if (parseInt(window.location.hash.slice(0)) == i){
+							document.getElementById("_" + String(i)).style.visibility == "visible";
+						} else {
+							document.getElementById("_" + String(i)).style.visibility == "hidden";
+						}
+					}
+				} */
+			if(seamlessCheckbox.checked == true) {
+				seamlessCheckbox.checked = false;
+				document.body.classList.remove('seamless');
+				writeConfig({
+					seamless: seamlessEnabled,
+				});
+			}
+			if(smoothScrollCheckbox.checked == true) {
+				smoothScrollCheckbox.checked = false; 
+				window.pauseZenscroll = !event.target.checked;
+				writeConfig({
+					smoothScroll: event.target.checked,
+				});
+			}
+		}
   }	
 
 
@@ -474,6 +490,7 @@
 	const seamlessEnabled = event.target.checked;
 	if (seamlessEnabled) {
 	  document.body.classList.add('seamless');
+		$("helper").css( "display", "none" );
 	} else {
 	  document.body.classList.remove('seamless');
 	}
