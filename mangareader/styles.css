@@ -28,7 +28,7 @@ body {
   --toggle-nib-color: #c0c0c0;
   --toggle-nib-color-checked: #848484;
   --menu-subtitle-color: #808080;
-  --menu-icon: url('menu.svg');
+  --menu-icon: url('http://ashsgrafiction.com/comics/menu.svg');
   --page-vertical-margin: 50px;
   --scrubber-background-rgb: 0, 0, 0;
   --scrubber-background-opacity: 0.6;
@@ -51,7 +51,7 @@ body.dark {
   --toggle-nib-color: #4a4a4a;
   --toggle-nib-color-checked: #4a4a4a;
   --menu-subtitle-color: #8c8c8c;
-  --menu-icon: url('menu-light.svg');
+  --menu-icon: url('http://ashsgrafiction.com/comics/menu-light.svg');
   --scrubber-icon: url('scroll-light.svg');
 }
 
