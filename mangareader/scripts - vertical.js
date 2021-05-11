@@ -669,6 +669,7 @@
 		attachIntersectObservers();
 		//checkVersion();
 		setupScrubber();
+		setImagesWidth(screenClamp.fit, getWidth());
   }
 
   main();
