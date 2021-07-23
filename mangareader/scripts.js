@@ -1,11 +1,3 @@
-/*
-  ▄ .▄      ▄▄▄  ▪  ·▄▄▄▄•       ▐ ▄ ▄▄▄▄▄ ▄▄▄· ▄▄▌      ▄▄▄  ▄▄▄ . ▄▄▄· ·▄▄▄▄  ▄▄▄ .▄▄▄  
-██▪▐█▪     ▀▄ █·██ ▪▀·.█▌▪     •█▌▐█•██  ▐█ ▀█ ██•      ▀▄ █·▀▄.▀·▐█ ▀█ ██▪ ██ ▀▄.▀·▀▄ █·
-██▀▐█ ▄█▀▄ ▐▀▀▄ ▐█·▄█▀▀▀• ▄█▀▄ ▐█▐▐▌ ▐█.▪▄█▀▀█ ██▪      ▐▀▀▄ ▐▀▀▪▄▄█▀▀█ ▐█· ▐█▌▐▀▀▪▄▐▀▀▄ 
-██▌▐▀▐█▌.▐▌▐█•█▌▐█▌█▌▪▄█▀▐█▌.▐▌██▐█▌ ▐█▌·▐█ ▪▐▌▐█▌▐▌    ▐█•█▌▐█▄▄▌▐█ ▪▐▌██. ██ ▐█▄▄▌▐█•█▌
-▀▀▀ · ▀█▄▀▪.▀  ▀▀▀▀·▀▀▀ • ▀█▄▀▪▀▀ █▪ ▀▀▀  ▀  ▀ .▀▀▀     .▀  ▀ ▀▀▀  ▀  ▀ ▀▀▀▀▀•  ▀▀▀ .▀  ▀ 
-*/
-
 (function () {
   /**
    * CONFIGURATION AND CONSTANTS
@@ -669,7 +661,12 @@
 		attachIntersectObservers();
 		//checkVersion();
 		setupScrubber();
-		setImagesWidth(screenClamp.fit, getWidth());
+		
+		//Vertical
+		//setImagesWidth(screenClamp.fit, getWidth());
+		
+		//Horizontal
+		setImagesDimensions(screenClamp.shrink, getWidth(), getHeight());
   }
 
   main();
