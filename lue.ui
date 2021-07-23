@@ -1,0 +1,170 @@
+<?xml version='1.0' encoding='utf-8'?>
+<interface version="1.1">
+  <object class="ttk.Frame" id="Lue">
+    <property name="height">600</property>
+    <property name="padding">20</property>
+    <property name="relief">groove</property>
+    <property name="width">600</property>
+    <layout manager="pack">
+      <property name="expand">false</property>
+      <property name="ipadx">5</property>
+      <property name="ipady">5</property>
+      <property name="propagate">True</property>
+      <property name="side">top</property>
+    </layout>
+    <child>
+      <object class="ttk.Label" id="title">
+        <property name="anchor">ne</property>
+        <property name="compound">top</property>
+        <property name="cursor">based_arrow_down</property>
+        <property name="font">TkTextFont</property>
+        <property name="justify">left</property>
+        <property name="padding">5</property>
+        <property name="takefocus">true</property>
+        <property name="text" translatable="yes">Comic title</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">0</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Entry" id="title_entry">
+        <property name="text" translatable="yes">entry3</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">1</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Label" id="author">
+        <property name="compound">bottom</property>
+        <property name="cursor">based_arrow_down</property>
+        <property name="padding">5</property>
+        <property name="takefocus">false</property>
+        <property name="text" translatable="yes">Author</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">2</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Entry" id="author_entry">
+        <property name="cursor">arrow</property>
+        <property name="justify">left</property>
+        <property name="text" translatable="yes">entry5</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">3</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Label" id="html">
+        <property name="compound">top</property>
+        <property name="cursor">arrow</property>
+        <property name="justify">left</property>
+        <property name="padding">5</property>
+        <property name="text" translatable="yes">HTML File</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">4</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="pygubu.builder.widgets.pathchooserinput" id="html_entry">
+        <property name="type">file</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">5</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Label" id="orientation">
+        <property name="padding">5</property>
+        <property name="text" translatable="yes">Reading orientation?</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">6</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Radiobutton" id="v_orientation">
+        <property name="text" translatable="yes">Vertical</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">7</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Radiobutton" id="h_orientation">
+        <property name="cursor">arrow</property>
+        <property name="state">normal</property>
+        <property name="text" translatable="yes">Horizontal</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">8</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Label" id="bg">
+        <property name="anchor">n</property>
+        <property name="justify">left</property>
+        <property name="padding">5</property>
+        <property name="text" translatable="yes">Background color</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">9</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Radiobutton" id="l_bg">
+        <property name="takefocus">false</property>
+        <property name="text" translatable="yes">Light</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">10</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Radiobutton" id="d_bg">
+        <property name="text" translatable="yes">Dark</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">11</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Button" id="button1">
+        <property name="text" translatable="yes">button1</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">12</property>
+        </layout>
+      </object>
+    </child>
+  </object>
+</interface>
