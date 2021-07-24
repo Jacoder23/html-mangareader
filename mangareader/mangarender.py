@@ -167,11 +167,14 @@ def create_out_path(outpath: Path) -> None:
 def extract_render(
     path: str,
     version: str,
+    input_title: str,
     doc_template_path: str,
     page_template_path: str,
     boot_template_path: str,
     asset_paths: Iterable[str],
     img_types: Iterable[str],
+    dark: bool,
+    horizontal: bool,
     outpath: Path = Path(tempfile.gettempdir()) / 'html-mangareader',
 ) -> Path:
     """Main controller procedure. Handles opening of archive, image, or directory and renders the images
@@ -225,6 +228,9 @@ def extract_render(
         else:
             imgpaths = scan_directory(path, img_types)
             title = pPath.name
+            
+        title = input_title
+        
         create_out_path(outpath)
         render_copy(asset_paths, outpath)
         renderfile = render_from_template(
