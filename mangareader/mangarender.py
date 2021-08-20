@@ -10,7 +10,7 @@ from typing import List, Any, Union, Iterable
 from mangareader.excepts import ImagesNotFound
 from mangareader.templates import RAR_TYPES, ZIP_TYPES, _7Z_TYPES
 from mangareader.sevenzipadapter import SevenZipAdapter
-from shutil import copy
+from shutil import copy, rmtree
 
 
 def render_from_template(
@@ -200,6 +200,7 @@ def extract_render(
     """
     start = 0
     pPath = Path(path).resolve()
+    rmtree(os.path.dirname(os.path.join(tempfile.gettempdir(), 'html-mangareader', 'render.html')), ignore_errors=True)
     doc_template, page_template, boot_template = (
         resolve_template(p) for p in (doc_template_path, page_template_path, boot_template_path)
     )

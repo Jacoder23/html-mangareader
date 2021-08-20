@@ -1,4 +1,9 @@
+// Light, Horizontal
+
 (function () {
+	
+	var resetStorage = true;
+
   /**
    * CONFIGURATION AND CONSTANTS
    */
@@ -9,7 +14,7 @@
 	smoothScroll: true,
 	darkMode: false,
 	seamless: false,
-	horizontal: false,
+	horizontal: true,
   };
 
   const screenClamp = {
@@ -332,7 +337,7 @@
 			horizontal: horizontalReaderEnabled,
 			});
 		}
-		visiblePage.scrollIntoView();
+		//visiblePage.scrollIntoView();
 		setImagesDimensions(screenClamp.shrink, getWidth(), getHeight());
 
 		if(seamlessCheckbox.checked == true) {
@@ -380,7 +385,7 @@
 		  });
 	  }
 	}
-	visiblePage.scrollIntoView();
+	//visiblePage.scrollIntoView();
   }
 
   function setImagesHeight(fitMode, height) {
@@ -411,7 +416,7 @@
 		  });
 	  }
 	}
-	visiblePage.scrollIntoView();
+	//visiblePage.scrollIntoView();
   }
 
   function setImagesDimensions(fitMode, width, height) {
@@ -442,7 +447,7 @@
 				});
 			}
 		}
-		visiblePage.scrollIntoView();
+		//visiblePage.scrollIntoView();
 		}
 
   function smartFitImages(fitMode) {
@@ -499,7 +504,7 @@
 	writeConfig({
 	  seamless: seamlessEnabled,
 	});
-	visiblePage.scrollIntoView();
+	//visiblePage.scrollIntoView();
   }
 
   function setupListeners() {
@@ -657,17 +662,75 @@
 	})(); */
 
   function main() {
+		
+		if(resetStorage){
+			localStorage.removeItem(storageKey);
+		}
+		
 		setupListeners();
 		loadSettings();
 		attachIntersectObservers();
 		//checkVersion();
 		setupScrubber();
 		
-		//Vertical
-		//setImagesWidth(screenClamp.fit, getWidth());
+	  const change = document.createEvent('Event');
+	  change.initEvent('change', false, true);
+	  darkModeCheckbox.dispatchEvent(change);
 		
-		//Horizontal
-		setImagesDimensions(screenClamp.shrink, getWidth(), getHeight());
+	  change.initEvent('change', false, true);
+	  horizontalReader.dispatchEvent(change);
+		
+		try{
+			if(JSON.parse(localStorage.getItem(storageKey)).horizontal){
+				setImagesDimensions(screenClamp.shrink, getWidth(), getHeight());
+				if(seamlessCheckbox.checked == true) {
+					seamlessCheckbox.checked = false;
+					document.body.classList.remove('seamless');
+					writeConfig({
+						seamless: seamlessEnabled,
+					});
+				}
+				if(smoothScrollCheckbox.checked == true) {
+					smoothScrollCheckbox.checked = false; 
+					window.pauseZenscroll = !event.target.checked;
+					writeConfig({
+						smoothScroll: event.target.checked,
+					});
+				}
+			} else {
+				setImagesWidth(screenClamp.fit, getWidth());
+			}
+			console.log("Horizontal: " + JSON.parse(localStorage.getItem(storageKey)).horizontal);
+		}
+		catch (err) {
+			console.log(err)
+			if(defaultConfig.horizontal){
+				setImagesDimensions(screenClamp.shrink, getWidth(), getHeight());
+				if(seamlessCheckbox.checked == true) {
+					seamlessCheckbox.checked = false;
+					document.body.classList.remove('seamless');
+					writeConfig({
+						seamless: seamlessEnabled,
+					});
+				}
+				if(smoothScrollCheckbox.checked == true) {
+					smoothScrollCheckbox.checked = false; 
+					window.pauseZenscroll = !event.target.checked;
+					writeConfig({
+						smoothScroll: event.target.checked,
+					});
+				}
+			} else {
+				setImagesWidth(screenClamp.fit, getWidth());
+			}
+			console.log("Horizontal: " + defaultConfig.horizontal);
+		}
+		
+		change.initEvent('change', false, true);
+	  smoothScrollCheckbox.dispatchEvent(change);
+		
+		change.initEvent('change', false, true);
+		seamlessCheckbox.dispatchEvent(change);
   }
 
   main();

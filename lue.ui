@@ -166,5 +166,15 @@
         </layout>
       </object>
     </child>
+    <child>
+      <object class="ttk.Button" id="export">
+        <property name="text" translatable="yes">Export</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">13</property>
+        </layout>
+      </object>
+    </child>
   </object>
 </interface>

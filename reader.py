@@ -4,6 +4,7 @@ import sys
 import traceback
 import webbrowser
 from os import path
+import glob
 from tkinter import *
 from tkinter import Tk, messagebox, filedialog
 import tkinter as tk
@@ -52,6 +53,7 @@ class LueWidget(ttk.Frame):
         self.html_entry = PathChooserInput(self)
         self.html_entry.configure(type='directory')
         self.html_entry.grid(column='0', row='5')
+        
         self.orientation = ttk.Label(self)
         self.orientation.configure(padding='5', text='Reading orientation')
         self.orientation.grid(column='0', row='6')
@@ -61,6 +63,7 @@ class LueWidget(ttk.Frame):
         self.h_orientation = ttk.Radiobutton(self)
         self.h_orientation.configure(text='Horizontal', variable=self.orient, value=2)
         self.h_orientation.grid(column='0', row='8')
+        
         self.bg = ttk.Label(self)
         self.bg.configure(anchor='n', justify='left', padding='5', text='Background color')
         self.bg.grid(column='0', row='9')
@@ -70,8 +73,9 @@ class LueWidget(ttk.Frame):
         self.d_bg = ttk.Radiobutton(self)
         self.d_bg.configure(text='Dark', variable=self.color, value=2)
         self.d_bg.grid(column='0', row='11')
+        
         self.button1 = ttk.Button(self)
-        self.button1.configure(text='Submit', command=lambda : submit(self))
+        self.button1.configure(text='Render', command=lambda : submit(self))
         self.button1.grid(column='0', row='12')
         
 def submit(self):
@@ -83,7 +87,8 @@ def parse_args() -> Namespace:
     parser.add_argument('--no-browser', action='store_true')
     return parser.parse_args()
 
-def main(self, filepath) -> None:
+def main(form, filepath) -> None:
+    assets = list(templates.ASSETS)
     args = parse_args()
     target_path = filepath
     ##target_path = args.path
@@ -91,14 +96,25 @@ def main(self, filepath) -> None:
     lib_dir = f'{working_dir}/mangareader'
     with open(f'{working_dir}/version', encoding='utf-8') as version_file:
         version = version_file.read().strip()
-    if self.color == 1:
+    if form.color.get() == 1:
         dark = False
+        if form.orient.get() == 1:
+            horizontal = False
+            assets[1] = "scripts - LV.js"
+        else:
+            horizontal = True
+            assets[1] = "scripts - LH.js"
     else:
         dark = True
-    if self.orient == 1:
-        horizontal = False
-    else:
-        horizontal = True
+        if form.orient.get() == 1:
+            horizontal = False
+            assets[1] = "scripts - DV.js"
+        else:
+            horizontal = True
+            assets[1] = "scripts - DH.js"
+            
+    print("Dark: " + str(dark))
+    print("Horizontal: " + str(horizontal))
     try:
         boot_path = extract_render(
             path=target_path,
@@ -106,11 +122,11 @@ def main(self, filepath) -> None:
             doc_template_path=f'{lib_dir}/doc.template.html',
             page_template_path=f'{lib_dir}/img.template.html',
             boot_template_path=f'{lib_dir}/boot.template.html',
-            asset_paths=(f'{lib_dir}/{asset}' for asset in templates.ASSETS),
+            asset_paths=(f'{lib_dir}/{asset}' for asset in set(assets)),
             img_types=templates.DEFAULT_IMAGETYPES,
             dark=dark,
             horizontal=horizontal,
-            input_title=self.title_entry.get() + " - By " + self.author_entry.get()
+            input_title=form.title_entry.get() + " - By " + form.author_entry.get()
         )
         if args.no_browser:
             print(boot_path)
