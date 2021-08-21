@@ -242,7 +242,7 @@
   }
 
   function setupZenscroll(config) {
-	window.zenscroll.setup(170);
+	//window.zenscroll.setup(170);
 	if (config.smoothScroll) {
 	  smoothScrollCheckbox.checked = true;
 	} else {
