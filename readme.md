@@ -5,7 +5,6 @@ This is a personal fork from luejerry's [HTML] Mangareader intended for use in A
 ### Prerequisites
 
 - Python 3.5+
-- PyInstaller: `pip install pyinstaller` (only required for building)
 - Rarfile: `pip install rarfile` or `pip install -r requirements.txt`
 - py7zr: `pip install py7zr` or `pip install -r requirements.txt`
 
