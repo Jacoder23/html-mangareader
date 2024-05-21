@@ -13,11 +13,22 @@ from pygubu.widgets.pathchooserinput import PathChooserInput
 from mangareader.mangarender import extract_render
 from mangareader import templates
 from time import sleep
+import shutil, errno
 
 PROJECT_PATH = os.path.abspath(os.path.dirname(__file__))
 PROJECT_UI = os.path.join(PROJECT_PATH, "lue.ui")
 
 class LueWidget(ttk.Frame):  
+
+    # https://stackoverflow.com/a/1994840
+    def copyanything(self, src, dst):
+        try:
+            shutil.copytree(src, dst)
+        except OSError as exc: # python >2.5
+            if exc.errno in (errno.ENOTDIR, errno.EINVAL):
+                shutil.copy(src, dst)
+            else: raise
+
     def __init__(self, master=None, **kw):
         super(LueWidget, self).__init__(master, **kw)
 
@@ -132,10 +143,15 @@ def main(form, filepath) -> None:
             print(boot_path)
         else:
             webbrowser.open(boot_path.as_uri())
+        export_path = filedialog.askdirectory()
+        print(os.path.dirname(boot_path))
+        print(export_path)
+        comicTitle = form.title_entry.get()
+        form.copyanything(os.path.dirname(boot_path), os.path.join(export_path,''.join(comicTitle.split()).lower()))
     except Exception as e:
         Tk().withdraw()
         messagebox.showerror(
-            'Mangareader encountered an error: ' + type(e).__name__, ''.join(traceback.format_exc())
+            'Lue Comic Generator encountered an error: ' + type(e).__name__, ''.join(traceback.format_exc())
         )
     # # Read in the file
     # with open(filepath, 'r') as file :
