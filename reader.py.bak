@@ -168,7 +168,7 @@ def main(form, filepath) -> None:
         
         # just using urllib.parse fucks this up somehow
         # this is hardly production ready but hey im they only one who cares about this and has to clean up if something goes wrong so good enough
-        form.inplace_change(os.path.join(final_export_path, "index.html"), "file:///" + filepath.replace(" ", "%20").replace(",", "%2C").replace("[", "%5B").replace("]", "%%5D"), "https://ashsgrafiction.com/")
+        form.inplace_change(os.path.join(final_export_path, "index.html"), "file:///" + filepath.replace(" ", "%20").replace(",", "%2C").replace("[", "%5B").replace("]", "%5D"), "https://ashsgrafiction.com/")
     except Exception as e:
         Tk().withdraw()
         messagebox.showerror(
